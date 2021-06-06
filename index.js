@@ -5,6 +5,7 @@ const cors = require('cors');
 
 app.use(express.json()); //JSON parser for POST requests
 app.use(cors()) // Allow for CORS
+app.use(express.static('build')) //attach frontend
 
 let notes = [
   {
