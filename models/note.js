@@ -1,23 +1,5 @@
 const mongoose = require("mongoose");
 
-const URL = process.env.MONGODB_URI;
-
-console.log(`Connecting to ${URL}`);
-
-mongoose
-  .connect(URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
-  .then(() => {
-    console.log("connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("error connecting to MongoDB: ", error.message);
-  });
-
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
