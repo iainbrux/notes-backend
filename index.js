@@ -51,36 +51,36 @@ app.post("/api/notes", (request, response, next) => {
 
 app.delete("/api/notes/:id", (request, response, next) => {
   Note.findByIdAndRemove(request.params.id)
-    .then(result => response.status(204).end())
-    .catch(error => next(error))
+    .then(() => response.status(204).end())
+    .catch(error => next(error));
 });
 
-app.put('/api/notes/:id', (request, response, next) => {
-  const body = request.body
+app.put("/api/notes/:id", (request, response, next) => {
+  const body = request.body;
 
   const note = {
     content: body.content,
     important: body.important
-  }
+  };
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => response.json(updatedNote))
-    .catch(error => next(error))
-})
+    .catch(error => next(error));
+});
 
-const errorHandler = (error, request, response, text) => {
-  console.error(error.message)
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message);
 
-  if(error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
+  if(error.name === "CastError") {
+    return response.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return response.status(400).json({ error: error.message });
   }
 
-  next(error)
-}
+  next(error);
+};
 
-app.use(errorHandler) // this has to be the last loaded middleware to catch errors
+app.use(errorHandler); // this has to be the last loaded middleware to catch errors
 
 const PORT = process.env.PORT;
 

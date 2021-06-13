@@ -9,9 +9,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ../notes-frontend/ && yarn build --prod && cp -r build ../notes-backend",
-    "deploy": "git push heroku main",
+    "deploy": "git push heroku HEAD:main",
     "deploy:full": "yarn build:ui && git add . && git commit -m uibuild && git push && yarn deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint ."
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,6 +21,7 @@
     "mongoose": "^5.12.13"
   },
   "devDependencies": {
+    "eslint": "^7.28.0",
     "nodemon": "^2.0.7"
   }
 }
